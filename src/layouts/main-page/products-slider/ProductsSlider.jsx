@@ -5,7 +5,7 @@ import secondImage from '../../../assets/img/main-page/main-page-product-1.png'
 import thirdImage from '../../../assets/img/main-page/main-page-product-2.png'
 import fourthImage from '../../../assets/img/main-page/main-page-product-3.png'
 import fifthImage from '../../../assets/img/main-page/main-page-product-4.png'
-import "swiper/swiper-bundle.min.css";
+// import "swiper/swiper-bundle.min.css";
 import './products-slider.sass'
 
 const ProductsSlider = () => {

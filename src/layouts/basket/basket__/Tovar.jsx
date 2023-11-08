@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Context } from '../Basket';
 
-const Tovar = ({ currentItem, length, arr, setArr }) => {
+const Tovar = ({ currentItem, length, isChange, arr, setArr, setChange }) => {
   const [quentityTovars, setQuentityTovars] = useState(1);
+  const dispatch = useDispatch();
 
     const decrementFunc = (currentItem) => {
         setArr(() => {
@@ -37,30 +40,28 @@ const Tovar = ({ currentItem, length, arr, setArr }) => {
             })
         })
     }
-    
-    const reload = () => {  
-        console.log(arr.filter(item => item.currentItem.id === currentItem.id)[0]) 
-        setArr(() => {
-            return arr.map(item => {
-                if (item.currentItem.id === currentItem.id) {
-                    return {
-                        ...item,
-                        price:  parseInt(item.currentItem.price.replaceAll(' ', ''))*item.length
-                    }
-                }
-                return item;
-            })
-        })
-        return arr;
-    }
-
 
     const deleteTovar = () => {
         setArr(prev => prev.filter(item => item.currentItem.id !== currentItem.id));
     }
 
+    const context = useContext(Context);
+
+    useEffect(() => {
+        if (context) return;
+
+        setArr(() => {
+            return arr.map(item => {
+                return {
+                    ...item,
+                    price: parseInt(item.currentItem.price.replaceAll(' ', ''))*item.length
+                }
+            })
+        })
+    }, [context])
+
   return (
-    <div key={currentItem?.id} className="basket-table-item">
+    <section key={currentItem?.id} className="basket-table-item">
         <Link to={`/shop/${currentItem?.path}`}> 
             <img className='basket-table-item__img' src={currentItem?.imgs[0]} alt="" />
         </Link>
@@ -70,7 +71,7 @@ const Tovar = ({ currentItem, length, arr, setArr }) => {
             <br/>
             <span>{currentItem?.price.split(' ')[1]} ₽</span>
         </p>
-        <div className='tovar-page__quantity'>
+        <section className='tovar-page__quantity'>
             <button
                 onClick={
                     () => decrementFunc(currentItem)
@@ -84,12 +85,12 @@ const Tovar = ({ currentItem, length, arr, setArr }) => {
                 }
                     className='tovar-page-quantity__increment'
                 ></button>
-        </div>
-        <div className='tovar-page-folded-price'>
-            <p>{arr.filter(item => item.currentItem.id === currentItem.id)[0].price} ₽</p>
-        </div>
+        </section>
+        <section className='tovar-page-folded-price'>
+            <p>{arr.filter(item => item.currentItem.id === currentItem.id)[0].price.toLocaleString('ru-RU')} ₽</p>
+        </section>
         <button onClick={deleteTovar} className='tovar-page-delete'>✕</button>
-    </div>
+    </section>
   )
 }
 

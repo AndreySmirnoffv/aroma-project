@@ -10,6 +10,7 @@ import History from './layouts/geschichte/History';
 import About from './layouts/about/About';
 import Tovar from './layouts/tovar/Tovar';
 import {Basket} from "./layouts/basket/Basket";
+import { Checkout } from './layouts/basket/checkout/Checkout';
 
 const App = () => {
   
@@ -24,7 +25,8 @@ const App = () => {
           <Route path='/history' element={<History/>}/>
           <Route path='/about-us' element={<About/>}/>
           <Route path='shop/:path' element={<Tovar/>}/>
-            <Route path='korb' element={<Basket/>}/>
+          <Route path='korb' element={<Basket/>}/>
+          <Route path='checkout' element={<Checkout/>}/>
         </Routes>
       </div>
     </BrowserRouter>
