@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import TopPath from '../../top-path/TopPath'
-import './Checkout.sass'
 import { Steps } from '../steps/Steps'
 import { Details } from './details/Details'
+import './Checkout.sass'
 
 export const Checkout = () => {
   const [isActive, setIsActive] = useState(false);

@@ -2,6 +2,7 @@ import firstImage from "../../assets/img/about/first-img.png";
 import secondImage from "../../assets/img/about/second-img.png";
 import { Link } from "react-router-dom";
 import "./about.sass";
+import { useEffect } from "react";
 
 const About = () => {
   return (
